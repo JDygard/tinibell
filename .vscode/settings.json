@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/fd221c56-7590-4026-bc92-20d4ad30a3d4/resourceGroups/TinibellPostgres/providers/Microsoft.Web/sites/tinibell",
+    "appService.deploySubpath": "."
+}

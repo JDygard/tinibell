@@ -32,6 +32,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "tinibell.com",
+    "tinibell.azurewebsites.net",
 ]
 
 # Application definition
