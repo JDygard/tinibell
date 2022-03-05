@@ -117,6 +117,8 @@ DATABASES = {
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
