@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'tinibell'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EA45EDAF147A4E8091F8BFB56EA58EBD }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B6602C02CB0F4D5AB4BE56BB69CE6FEA }}
