@@ -52,6 +52,10 @@ body {
     cursor: pointer;
 }
 
+#brand-img {
+    height:8vh;
+}
+
 
 #nav_endcap {
     position:absolute;

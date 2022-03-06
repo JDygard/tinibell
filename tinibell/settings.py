@@ -44,6 +44,7 @@ ALLOWED_HOSTS = [
     "tinibell.azurewebsites.net",
     "https://tinibell.com",
     "https://tinibell.azurewebsites.net",
+    "127.0.0.1",
 ]
 
 SESSION_COOKIE_SAMESITE = "None"
@@ -172,7 +173,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-#EMAIL_BACKEND = 'django_o365mail.EmailBackend'
+# EMAIL_BACKEND = 'django_o365mail.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = "smtp.office365.com"
 EMAIL_PORT = "587"
