@@ -2,36 +2,58 @@
 <div class="bg-beige">
     <nav class="navbar navbar-expand-lg navbar-light bg-orange">
         <a class="navbar-brand" href="{% url 'home' %}"><img id="brand-img" src="https://chaos-legacy-imgserve.s3.eu-north-1.amazonaws.com/logo.png" alt=""></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{% url 'products' %}">Products</a>
-                <a class="nav-item nav-link" href="{% url 'events' %}">Events</a>
+            <ul class="navbar-nav">
+                <li class="nav-item ">
+                    <a class=" nav-link" href="{% url 'products' %}">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'events' %}">Events</a>
+                </li>
+
                 {% if request.user.is_authenticated %}
+                <li class="nav-item">
                     <a class="nav-item nav-link" href="{% url 'account_logout' %}">Logout</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                </li>
+
                 {% else %}
+                <li class="nav-item">
                     <a class="nav-item nav-link" href="{% url 'account_login' %}">Login</a>
+                </li>
+
+                <li class="nav-item" onmouseover="highlight(this)">
                     <a class="nav-item nav-link" href="{% url 'account_signup' %}">Register</a>
+                </li>
                 {% endif %}
+
                 {% if request.user.is_superuser %}
+                <li class="nav-item">
                     <a class="nav-item nav-link" href="{% url 'add_product' %}">Big Cheese</a>
+                </li>
                 {% endif %}
-            </div>
+            </ul>
         </div>
-        
+
+
+
         {% if total %}
-            <a class="{% if total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block" href="{% url 'view_bag' %}">
-                <div class="text-center">
-                    <div><i class="fas fa-shopping-bag fa-lg"></i>
-                    <p class="my-0">
-                        ${{ total|floatformat:2 }}
-                    </p>
-                </div>
-            </a>
-        {% endif %}
+        <a class="{% if total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block" href="{% url 'view_bag' %}">
+        <div class="text-center">
+            <div><i class="fas fa-shopping-bag fa-lg"></i>
+            <p class="my-0">
+
+                {% endif %}
+            </p>
+        </div>
+
+    </a> 
     </nav>
+
 </div>

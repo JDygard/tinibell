@@ -173,8 +173,8 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-# EMAIL_BACKEND = 'django_o365mail.EmailBackend'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django_o365mail.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = "smtp.office365.com"
 EMAIL_PORT = "587"
 EMAIL_HOST_USER = "info@tinibell.com"

@@ -56,6 +56,14 @@ body {
     height:8vh;
 }
 
+.nav-link{
+    color: white !important;
+}
+
+.nav-link:hover {
+    color: black !important;
+    text-decoration: underline; 
+}
 
 #nav_endcap {
     position:absolute;
