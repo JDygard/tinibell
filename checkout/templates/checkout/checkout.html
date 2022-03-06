@@ -3,7 +3,7 @@
 {% load bag_tools %}
 
 {% block extra_css %}
-    <link type="text/css" href="{% static 'css/checkout.css' %}">
+    <link type="text/css" href="https://chaos-legacy-imgserve.s3.eu-north-1.amazonaws.com/static/css/checkout.css">
 {% endblock %}
 
 {% block page_header %}
@@ -144,5 +144,5 @@
     {{ block.super }}
     {{ stripe_public_key|json_script:"id_stripe_public_key" }}
     {{ client_secret|json_script:"id_client_secret" }}
-    <script src="{% static 'stripe_elements.js' %}"></script>
+    <script src="https://chaos-legacy-imgserve.s3.eu-north-1.amazonaws.com/static/js/stripe_elements.js"></script>
 {% endblock %}
