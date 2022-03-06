@@ -27,8 +27,9 @@
                         </div>
                     </div>
                     {% for product in products %}
-                        <div class="card{% if product.vegan %} vegan{% endif %}{% if product.nut_free %} nut-free{% endif %}{% if product.gluten_free %} gluten-free{% endif %}{% if product.discontinued %} discontinued{% endif %}" style="width: 18rem;">
-                            <img class="card-img-top" src="/media/{{ product.image_1 }}" alt="Card image cap">
+
+                    <div class=" p-2 card{% if product.vegan %} vegan{% endif %}{% if product.nut_free %} nut-free{% endif %}{% if product.gluten_free %} gluten-free{% endif %}{% if product.discontinued %} discontinued{% endif %}" style="width: 18rem;">                            <img class="card-img-top" src="/media/{{ product.image_1 }}" alt="Card image cap">
+                        <img class="card-img-top pt-2" src="/media/{{ product.image_1 }}" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">{{ product.name }}</h5>
                                 <p>{{ product.description }}</p>

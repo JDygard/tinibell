@@ -17,7 +17,7 @@ def view_bag(request):
     send_mail(
         'Subject here',
         'Here is the message. Get that on your dicko, bucko.',
-        'info@tinibell.com',
+        'tinibellinfo@gmail.com',
         ['jdygard@gmail.com'],
         fail_silently=False,
     )
