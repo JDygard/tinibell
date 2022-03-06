@@ -30,10 +30,38 @@ STRIPE_CURRENCY = "USD"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+CSRF_COOKIE_DOMAIN = "tinibell.com"
+CSRF_TRUSTED_ORIGINS = [
+    "https://tinibell.com",
+]
+CORS_ORIGIN_WHITELIST = (
+    "tinibell.com",
+)
+CSRF_COOKIE_SAMESITE = "None"
+
 ALLOWED_HOSTS = [
     "tinibell.com",
     "tinibell.azurewebsites.net",
+    "https://tinibell.com",
+    "https://tinibell.azurewebsites.net",
 ]
+
+SESSION_COOKIE_SAMESITE = "None"
+
+SESSION_COOKIE_SECURE = True
+
+X_FRAME_OPTIONS = "ALLOWALL"
+
+CSRF_COOKIE_SECURE = True
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_CREDENTIALS = True
+
+CSRF_COOKIE_HTTPONLY = False
+
 
 # Application definition
 
@@ -177,7 +205,8 @@ SITE_ID = 1
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/css')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
