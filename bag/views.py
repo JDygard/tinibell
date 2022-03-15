@@ -9,18 +9,12 @@ from products.models import Product
 from django.contrib import messages
 
 from django.core.mail import send_mail
+from django.conf import settings
 
 
 
 # Create your views here.
 def view_bag(request):
-    send_mail(
-        'Subject here',
-        'Here is the message. Get that on your dicko, bucko.',
-        'tinibellinfo@gmail.com',
-        ['jdygard@gmail.com'],
-        fail_silently=False,
-    )
     bag = request.session.get('bag', {})
     template = "bag/bag.html"
     context = {
