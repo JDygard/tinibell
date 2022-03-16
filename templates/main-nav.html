@@ -45,13 +45,14 @@
 
         {% if total %}
         <a class="{% if total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block" href="{% url 'view_bag' %}">
-        <div class="text-center">
-            <div><i class="fas fa-shopping-bag fa-lg"></i>
-            <p class="my-0">
-
-                {% endif %}
-            </p>
-        </div>
+            <div class="text-center">
+                <i class="fas fa-shopping-bag fa-lg"></i>
+                <p class="my-0">
+                    ${{ total|floatformat:2 }}
+                </p>
+            </div>
+        </a>
+    {% endif %}
 
     </a> 
     </nav>

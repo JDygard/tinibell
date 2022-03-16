@@ -84,6 +84,11 @@
                                 {{ order_form.county | as_crispy_field }}
                                 {{ order_form.postcode | as_crispy_field }}
                                 {{ order_form.country | as_crispy_field }}
+                                <select name="location" id="locations_select">
+                                    {% for location in locations %}
+                                        <option value="{{ location.id }}">{{ location.description }}</option>
+                                    {% endfor %}
+                                </select>
                                 <div class="form-check form-check-inline float-right mr-0">
                                     {% if user.is_authenticated %}
                                         <label class="form-check-label" for="id-save-info">Save this information to my profile</label>
@@ -123,7 +128,7 @@
                                     <span class="icon">
                                         <i class="fas fa-exclamation-circle"></i>
                                     </span>
-                                    <span>Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong></span>
+                                    <span>Your card will be charged <strong>${{ order_total|floatformat:2 }}</strong></span>
                                 </p>
                             </div>
                         </form>
@@ -217,7 +222,7 @@
                             line1: $.trim(form.street_address1.value),
                             line2: $.trim(form.street_address2.value),
                             city: $.trim(form.town_or_city.value),
-                            country: "USA",
+                            country: $.trim(form.country.value),
                             state: $.trim(form.county.value),
                         }
                     }
@@ -229,7 +234,7 @@
                         line1: $.trim(form.street_address1.value),
                         line2: $.trim(form.street_address2.value),
                         city: $.trim(form.town_or_city.value),
-                        country: "USA",
+                        country: $.trim(form.country.value),
                         postal_code: $.trim(form.postcode.value),
                         state: $.trim(form.county.value),
                     }

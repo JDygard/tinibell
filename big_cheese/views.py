@@ -54,7 +54,7 @@ def submit_product(request, item_id):
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
-            messages.success(request, "Nothing beside remains. Round the decay Of that colossal Wreck, boundless and bare The lone and level sands stretch far away.”")
+            messages.success(request, "Nothing beside remains./ Round the decay Of that colossal Wreck, boundless and bare/ The lone and level sands stretch far away.”")
         else:
             messages.error(request, "Invalid field data.")
     form = ProductForm(initial={
@@ -149,7 +149,7 @@ def site_ctrl(request):
         form = ControlForm(request.POST, instance=control)
         if form.is_valid():
             form.save()
-            messages.success(request, "They do not deserve the bounty of your kitchen; let them starve.")
+            messages.success(request, "They do not deserve the bounty of your larder; let them starve.")
         else:
             messages.error(request, "If you're seeing this error, something crazy happened. Call Joel if it happens more than once.")
     context = {

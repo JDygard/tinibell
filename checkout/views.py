@@ -9,6 +9,7 @@ from profiles.models import UserProfile
 from profiles.forms import UserProfileForm
 from .models import OrderLineItem, Order
 from .forms import OrderForm
+from big_cheese.models import PickupLocation
 from bag.contexts import bag_contents
 
 import stripe
@@ -37,6 +38,7 @@ def cache_checkout_data(request):
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
+    locations = PickupLocation.objects.all()
 
     if request.method == 'POST':
         bag = request.session.get('bag', {})
@@ -47,15 +49,19 @@ def checkout(request):
             'phone_number': request.POST['phone_number'],
             'postcode': request.POST['postcode'],
             'town_or_city': request.POST['town_or_city'],
+            'county': request.POST['county'],
             'street_address1': request.POST['street_address1'],
             'street_address2': request.POST['street_address2'],
+            'country': request.POST['country'],
         }
 
         order_form = OrderForm(form_data)
         if order_form.is_valid():
+            pickup_location=PickupLocation.objects.get(id=request.POST['location'])
             order = order_form.save(commit=False)
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
+            print(order)
             order.original_bag = json.dumps(bag)
             order.save()
             for item_id, item_data in bag.items():
@@ -64,6 +70,7 @@ def checkout(request):
                     order_line_item = OrderLineItem(
                         order=order,
                         product=product,
+                        pickup_location=pickup_location,
                         quantity=item_data,
                     )
                     order_line_item.save()
@@ -78,12 +85,12 @@ def checkout(request):
 
             # Save the info to the user's profile if all is well
             request.session['save_info'] = 'save-info' in request.POST
-            print("oh fuck yeah")
             return redirect(reverse('checkout_success',
                                     args=[order.order_number]))
         else:
             messages.error(request, ('There was an error with your form. '
                                      'Please double check your information.'))
+            return redirect(reverse('view_bag'))
     else:
         bag = request.session.get('bag', {})
         if not bag:
@@ -99,7 +106,6 @@ def checkout(request):
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
         )
-
         # Attempt to prefill the form with any info
         # the user maintains in their profile
         if request.user.is_authenticated:
@@ -129,6 +135,7 @@ def checkout(request):
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
+        'locations': locations,
     }
 
     return render(request, template, context)
@@ -137,6 +144,7 @@ def checkout(request):
 def checkout_success(request, order_number):
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
+    locations = PickupLocation.objects.all()
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
@@ -169,6 +177,7 @@ def checkout_success(request, order_number):
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
+        "locations": locations,
     }
 
     return render(request, template, context)

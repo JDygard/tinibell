@@ -12,9 +12,6 @@ class UserProfile(models.Model):
     delivery information and order history
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    default_gluten_free = models.BooleanField(default=False, blank=False, null=False)
-    default_nut_free = models.BooleanField(default=False, blank=False, null=False)
-    default_vegan = models.BooleanField(default=False, blank=False, null=False)
     default_phone_number = models.CharField(max_length=20, null=True, blank=True)
     default_postcode = models.CharField(max_length=20, null=True, blank=True)
     default_town_or_city = models.CharField(max_length=40, null=True, blank=True)
@@ -26,6 +23,11 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+class UserPreferences(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    default_gluten_free = models.BooleanField(default=False, blank=False, null=False)
+    default_nut_free = models.BooleanField(default=False, blank=False, null=False)
+    default_vegan = models.BooleanField(default=False, blank=False, null=False)
 
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):

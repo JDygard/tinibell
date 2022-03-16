@@ -31,19 +31,23 @@ STRIPE_CURRENCY = "USD"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-CSRF_COOKIE_DOMAIN = "tinibell.com"
+# CSRF_COOKIE_DOMAIN = [
+#     "www.tinibell.com",
+# ]
 CSRF_TRUSTED_ORIGINS = [
-    "https://tinibell.com",
+    "https://www.tinibell.com",
+    "http://127.0.0.1:8000"
 ]
 CORS_ORIGIN_WHITELIST = (
-    "tinibell.com",
+    "www.tinibell.com",
+    "127.0.0.1:8000"
 )
 CSRF_COOKIE_SAMESITE = "None"
 
 ALLOWED_HOSTS = [
-    "tinibell.com",
+    "www.tinibell.com",
     "tinibell.azurewebsites.net",
-    "https://tinibell.com",
+    "https://www.tinibell.com",
     "https://tinibell.azurewebsites.net",
     "127.0.0.1",
 ]
@@ -174,7 +178,8 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = "tinibellinfo@gmail.com"
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
