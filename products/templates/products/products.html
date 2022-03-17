@@ -17,7 +17,7 @@
                             <button id="discontinued" class="btn btn-secondary">Discontinued</button>
                         </div>
                     </div>
-                    <div class="row" id="empty-message">
+                    <div class="row" id="empty-message" style="display:none">
                         <div class="col-12">
                             <h2>We're sorry, we don't have anything like that in the store.</h2>
                             <p>However, we'd love to hear from you! We can do custom orders in some cases.</p>
@@ -28,27 +28,27 @@
                     </div>
                     {% for product in products %}
 
-                    <div class=" p-2 card{% if product.vegan %} vegan{% endif %}{% if product.nut_free %} nut-free{% endif %}{% if product.gluten_free %} gluten-free{% endif %}{% if product.discontinued %} discontinued{% endif %}" style="width: 18rem;">                            <img class="card-img-top" src="/media/{{ product.image_1 }}" alt="Card image cap">
+                    <div class="p-2 card{% if product.vegan %} vegan{% endif %}{% if product.nut_free %} nut-free{% endif %}{% if product.gluten_free %} gluten-free{% endif %}{% if product.discontinued %} discontinued{% endif %}" style="width: 18rem;">
                         <img class="card-img-top pt-2" src="/media/{{ product.image_1 }}" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ product.name }}</h5>
-                                <p>{{ product.description }}</p>
-                                <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">View Product</a>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    {% if not product.gluten_free %}
-                                        <i class="fas fa-bread-slice" data-toggle="tooltip" data-placement="bottom" title="This product contains wheat gluten."></i>
-                                    {% endif %}
-                                    {% if not product.nut_free %}
-                                        <i class="fas fa-skull-crossbones" data-toggle="tooltip" data-placement="bottom" title="This product contains nuts or was processed closely with products containing nuts."></i>
-                                    {% endif %}
-                                    {% if not product.vegan %}
-                                        <i class="fas fa-cheese" data-toggle="tooltip" data-placement="bottom" title="This product contains animal products."></i>
-                                    {% endif %}
-                                </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p>{{ product.description }}</p>
+                            <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">View Product</a>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {% if not product.gluten_free %}
+                                    <i class="fas fa-bread-slice" data-toggle="tooltip" data-placement="bottom" title="This product contains wheat gluten."></i>
+                                {% endif %}
+                                {% if not product.nut_free %}
+                                    <i class="fas fa-skull-crossbones" data-toggle="tooltip" data-placement="bottom" title="This product contains nuts or was processed closely with products containing nuts."></i>
+                                {% endif %}
+                                {% if not product.vegan %}
+                                    <i class="fas fa-cheese" data-toggle="tooltip" data-placement="bottom" title="This product contains animal products."></i>
+                                {% endif %}
                             </div>
                         </div>
+                    </div>
                     {% endfor %}
                 </div>
             </div>

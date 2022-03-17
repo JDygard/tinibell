@@ -57,11 +57,11 @@ def checkout(request):
 
         order_form = OrderForm(form_data)
         if order_form.is_valid():
-            pickup_location=PickupLocation.objects.get(id=request.POST['location'])
+            pickup_location = PickupLocation.objects.get(id=request.POST['location'])
             order = order_form.save(commit=False)
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
-            print(order)
+            order.pickup_location = pickup_location
             order.original_bag = json.dumps(bag)
             order.save()
             for item_id, item_data in bag.items():
@@ -144,7 +144,7 @@ def checkout(request):
 def checkout_success(request, order_number):
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
-    locations = PickupLocation.objects.all()
+    location = order.pickup_location
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
@@ -177,7 +177,7 @@ def checkout_success(request, order_number):
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
-        "locations": locations,
+        "location": location,
     }
 
     return render(request, template, context)

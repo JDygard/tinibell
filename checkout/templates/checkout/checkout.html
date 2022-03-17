@@ -86,7 +86,7 @@
                                 {{ order_form.country | as_crispy_field }}
                                 <select name="location" id="locations_select">
                                     {% for location in locations %}
-                                        <option value="{{ location.id }}">{{ location.description }}</option>
+                                        <option value="{{ location.id }}">{{ location.name }} {{ location.description }}</option>
                                     {% endfor %}
                                 </select>
                                 <div class="form-check form-check-inline float-right mr-0">
