@@ -1,0 +1,44 @@
+{% extends 'big_cheese/big_cheese.html' %}
+{% block cheese %}
+    <div class="row splash">
+        <div class="col-12 bg-beige h-100 content">
+            <div class="row h-100 p-5">
+                <div class="col-12 w-100 my-1" id="{{ order.pk }}">
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-2">
+                            <h5>Name</h5>
+                        </div>
+                        <div class="col-3">
+                            <p>Order Number</p>
+                        </div>
+                        <div class="col-3">
+                            <p>Order Total</p>
+                        </div>
+                    </div>
+                </div>
+                <form id="update_orders" action="{% url 'orders' %}" class="update-form" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for order in orders %}
+                        <div class="col-12 w-100 border border-dark my-1" id="{{ order.pk }}">
+                            <div class="row">
+                                <div class="col-2">
+                                    <h5>{{ order.full_name }}</h5>
+                                </div>
+                                <div class="col-3">
+                                    <p>{{ order.order_number }}</p>
+                                </div>
+                                <div class="col-3">
+                                    <p>{{ order.order_total }}</p>
+                                </div>
+                                <div class="col-1">
+                                    <a href="{% url 'order' order.pk %}" name="{{ order.pk }}" class="btn btn-primary my-1">Detail view</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

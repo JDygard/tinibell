@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.admin.views.decorators import staff_member_required
 from .models import Prices, PickupLocation
+from checkout.models import Order
 from products.models import Product, Control
 from events.models import Events
 from .forms import (
@@ -45,6 +46,26 @@ def update_product(request):
 
     return render(request, template, context)
 
+
+def orders(request):
+    orders = Order.objects.all()
+    template = 'big_cheese/orders.html'
+    context = {
+        "orders": orders,
+    }
+    
+    return render(request, template, context)
+
+
+def order(request, order_number):
+    order = Order.objects.get(order_number=order_number)
+    context = {
+        "order": order,
+    }
+    template = 'big_cheese/order.html'
+
+    return render(request, template, context)
+    
 
 @staff_member_required
 def submit_product(request, item_id):

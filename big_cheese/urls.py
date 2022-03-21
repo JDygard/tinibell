@@ -13,4 +13,6 @@ urlpatterns = [
     path('pickup_location/', views.pickup_location, name="pickup_location"),
     path('pickup_location/<item_id>', views.update_location, name="update_location"),
     path('add_location/', views.add_location, name="add_location"),
+    path('orders/', views.orders, name="orders"),
+    path('order/<order_number>', views.order, name="order"),
 ]
